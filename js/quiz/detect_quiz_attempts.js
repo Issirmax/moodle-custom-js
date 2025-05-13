@@ -1,0 +1,41 @@
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("Aquiiii---");
+
+  detectQuizAttempts();    
+    
+});
+
+function detectQuizAttempts() {
+  // Validar desde pestania Preguntas
+  if(window.location.href.includes('/mod/quiz/edit.php')) {
+    // Detecta si se encuentra el mensaje de alerta de intentos en el examen en la pestania Preguntas 
+    const alertaIntentosPreguntas = document.querySelector('body#page-mod-quiz-edit .statusdisplay');
+    if(alertaIntentosPreguntas) {
+      const calificacionPreguntas = document.querySelector('form.quizsavegradesform');
+      calificacionPreguntas.style.display = 'none';
+    }
+
+    const bancoPreguntas = document.querySelectorAll('#page-mod-quiz-edit ul.section li a');
+    bancoPreguntas.forEach(a => {
+      const span = document.createElement('span');
+      span.innerHTML = a.innerHTML; // Conserva el contenido (incluyendo iconos, etiquetas internas, etc.)
+      span.className = a.className; // Conserva las clases
+      span.title = a.title;         // Conserva el titulo si lo tiene
+  
+      a.parentNode.replaceChild(span, a);
+    });
+  }
+  
+
+
+  // Validar desde pestania Configuracion del examen
+  const alertIntentos = document.querySelector('#id_sebcontainer .alert');
+  if (alertIntentos) {
+    const input = document.getElementById('id_gradepass'); // Input de calificacion
+    const span = document.createElement('span');
+    span.textContent = input.value; // Muestra el valor del input        
+
+    input.parentNode.replaceChild(span, input);
+  }
+
+}
