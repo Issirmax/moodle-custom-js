@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
+  alert("¡Hola! Este es un mensaje de prueba para validar los campos del curso.");
+  console.log("Validando campos del curso...");
   let e = [
       { name: "shortname", label: "Nombre corto del curso" }
     ],
