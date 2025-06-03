@@ -5,8 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     a = document.querySelector("form");
   a.addEventListener("submit", function (a) {
+    console.log("Validando campos del curso...");
     let t = !1;
     e.forEach((e) => {
+      console.log(`- Validando campo: ${e.name}`);
       let a = document.querySelector(`input[name="${e.name}"]`);
       if (!a) {
         console.warn(`- Campo no encontrado: ${e.name}`);
@@ -23,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         (r.innerHTML = "");
       let o = a.value;
       o.length > 100
+        console.log("- Validando longitud del campo:", e.name),
         ((r.innerHTML = `<br>- ${e.label} no puede tener m\xe1s de 100 caracteres.`),
           (t = !0));
     }),
