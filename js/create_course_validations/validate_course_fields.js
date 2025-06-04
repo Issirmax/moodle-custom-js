@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  alert("¡Hola! Este es un mensaje de prueba para validar los campos del curso.");
   console.log("Validando campos del curso...");
   let e = [
       { name: "shortname", label: "Nombre corto del curso" }
@@ -27,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
       let o = a.value;
       o.length > 100
         console.log("- Validando longitud del campo:", e.name),
-        alert(`El campo ${e.label} no puede tener más de 100 caracteres.`),
         ((r.innerHTML = `<br>- ${e.label} nor puede tener m\xe1s de 100 caractees.`),
           (t = !0));
     }),
