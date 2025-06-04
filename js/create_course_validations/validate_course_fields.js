@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("Validando campos del curso...");
   let e = [
       { name: "shortname", label: "Nombre corto del curso" }
-    ],
+    ];
     a = document.querySelector("form");
   a.addEventListener("submit", function (a) {
     console.log("Validando campos del curso...");
