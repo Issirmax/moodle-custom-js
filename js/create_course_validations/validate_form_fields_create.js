@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         errorElement.id = errorId;
         errorElement.style.color = "red";
         errorElement.style.fontSize = "0.9em";
-        errorElement.classList.add("mt-2 ms-2");
+        errorElement.classList.add("mt-2","ms-2");
         input.insertAdjacentElement("afterend", errorElement);
       }
 
