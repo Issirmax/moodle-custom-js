@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         errorElement.id = errorId;
         errorElement.style.color = "red";
         errorElement.style.fontSize = "0.9em";
-        errorElement.style.marginTop = "4px";
+        errorElement.classList.add("mt-2 ms-2");
         input.insertAdjacentElement("afterend", errorElement);
       }
 
@@ -44,15 +44,15 @@ document.addEventListener("DOMContentLoaded", function () {
       const value = input.value.trim();
       if(campo.name === "shortname" && value.length > 100) {
         console.log("- Validando longitud del campo:", campo.name);
-        errorElement.innerHTML = `<br> <br>- ${campo.label} no puede tener más de 100 caracteres.`;
+        errorElement.innerHTML = `${campo.label} no puede tener más de 100 caracteres.`;
         hasError = true;
       }
       if (campo.name === "fullname" && value.length > 255) {
         console.log("- Validando longitud del campo:", campo.name);
-        errorElement.innerHTML = `<br> <br>- ${campo.label} no puede tener más de 255 caracteres.`;
+        errorElement.innerHTML = `${campo.label} no puede tener más de 255 caracteres.`;
         hasError = true;
       }
-      
+
     });
 
     if (hasError) {
