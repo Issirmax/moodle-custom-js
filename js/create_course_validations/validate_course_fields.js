@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let e = [
       { name: "shortname", label: "Nombre corto del curso" }
     ];
-    a = document.querySelector("form");
+  a = document.querySelector('form[action*="course/edit.php"].mform');
   console.log("Formulario encontrado:", a);
   a.addEventListener("submit", function (a) {
     console.log("Validando campos del curso...");
