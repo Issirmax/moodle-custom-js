@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { name: "shortname", label: "Nombre corto del curso" }
     ];
     a = document.querySelector("form");
+  console.log("Formulario encontrado:", a);
   a.addEventListener("submit", function (a) {
     console.log("Validando campos del curso...");
     let t = !1;
