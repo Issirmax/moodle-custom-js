@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let o = a.value;
       o.length > 100
         console.log("- Validando longitud del campo:", e.name),
-        ((r.innerHTML = `<br>- ${e.label} nor puede tener m\xe1s de 100 caractees.`),
+        ((r.innerHTML = `<br>- ${e.label} no puede tener m\xe1s de 100 caractees.`),
           (t = !0));
     }),
       t && a.preventDefault();
