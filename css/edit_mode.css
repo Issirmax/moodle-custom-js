@@ -1,16 +1,1 @@
-input[id$="-editingswitch"].temporarily-disabled {
-  pointer-events: none;
-  filter: grayscale(0.5);
-  opacity: 1 !important;
-  box-shadow: none !important;
-  outline: none !important;
-  background-color: transparent !important;
-  border-color: transparent !important;
-  cursor: not-allowed !important; 
-}
-
-.temporarily-disabled-wrapper {
-  pointer-events: none;
-  cursor: not-allowed;
-  opacity: 1;
-}
+input[id$="-editingswitch"].temporarily-disabled { pointer-events: none; filter: grayscale(0.5); opacity: 1 !important; box-shadow: none !important; outline: none !important; background-color: transparent !important; border-color: transparent !important; cursor: not-allowed !important; } .temporarily-disabled-wrapper { pointer-events: none; cursor: not-allowed; opacity: 1; }
