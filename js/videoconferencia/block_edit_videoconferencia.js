@@ -1,47 +1,68 @@
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("[BBB DEBUG] Página cargada:", window.location.href);
+
   if (
     !window.location.href.includes("/course/modedit.php?update") &&
     !window.location.href.includes("/course/modedit.php?add=bigbluebutton")
-  )
-    return;
-
-  console.log("Bloqueando edición de videoconferencias iniciadas o finalizadas...");
-
-  const form = document.querySelector('form[action*="modedit.php"].mform');
-  if (!form) return;
-
-  const inputFechaInicio = document.querySelector('input[name="openingtime[day]"]')?.closest(".fdate_time_selector");
-  const inputFechaFin = document.querySelector('input[name="closingtime[day]"]')?.closest(".fdate_time_selector");
-
-  if (!inputFechaInicio || !inputFechaFin) {
-    console.warn("Campos de fecha no encontrados.");
+  ) {
+    console.log("[BBB DEBUG] Página no es de edición/creación de videoconferencia. Abortando.");
     return;
   }
 
-  // Obtener timestamps actuales de los campos
+  console.log("[BBB DEBUG] Página válida para validar videoconferencia.");
+
+  const form = document.querySelector('form[action*="modedit.php"].mform');
+  if (!form) {
+    console.warn("[BBB DEBUG] Formulario no encontrado.");
+    return;
+  }
+
+  console.log("[BBB DEBUG] Formulario encontrado:", form);
+
+  const inputFechaInicio = document.querySelector('select[name="openingtime[day]"]')?.closest(".fdate_time_selector");
+  const inputFechaFin = document.querySelector('select[name="closingtime[day]"]')?.closest(".fdate_time_selector");
+
+  if (!inputFechaInicio || !inputFechaFin) {
+    console.warn("[BBB DEBUG] No se encontraron los contenedores de fechas de inicio o fin.");
+    return;
+  }
+
+  console.log("[BBB DEBUG] Campos de fecha encontrados.");
+  console.log("[BBB DEBUG] Contenedor fecha inicio:", inputFechaInicio);
+  console.log("[BBB DEBUG] Contenedor fecha fin:", inputFechaFin);
+
   const obtenerTimestampDesdeCampos = (prefix) => {
-    const dia = parseInt(document.querySelector(`select[name="${prefix}[day]"]`)?.value || 0);
-    const mes = parseInt(document.querySelector(`select[name="${prefix}[month]"]`)?.value || 0) - 1;
-    const anio = parseInt(document.querySelector(`select[name="${prefix}[year]"]`)?.value || 0);
-    const hora = parseInt(document.querySelector(`select[name="${prefix}[hour]"]`)?.value || 0);
-    const minuto = parseInt(document.querySelector(`select[name="${prefix}[minute]"]`)?.value || 0);
+    const getValue = (name) => parseInt(document.querySelector(`select[name="${prefix}[${name}]"]`)?.value || 0);
+
+    const dia = getValue("day");
+    const mes = getValue("month") - 1;
+    const anio = getValue("year");
+    const hora = getValue("hour");
+    const minuto = getValue("minute");
+
+    console.log(`[BBB DEBUG] ${prefix}: Día=${dia}, Mes=${mes + 1}, Año=${anio}, Hora=${hora}, Minuto=${minuto}`);
+
     return new Date(anio, mes, dia, hora, minuto).getTime();
   };
 
   const ahora = Date.now();
+  console.log("[BBB DEBUG] Timestamp actual:", ahora, new Date(ahora));
+
   const inicioTimestamp = obtenerTimestampDesdeCampos("openingtime");
   const finTimestamp = obtenerTimestampDesdeCampos("closingtime");
 
-  console.log("Inicio:", new Date(inicioTimestamp), "Fin:", new Date(finTimestamp), "Ahora:", new Date(ahora));
+  console.log("[BBB DEBUG] Timestamp inicio:", inicioTimestamp, new Date(inicioTimestamp));
+  console.log("[BBB DEBUG] Timestamp fin:", finTimestamp, new Date(finTimestamp));
 
   if (ahora >= inicioTimestamp || ahora >= finTimestamp) {
-    console.warn("La sesión ya inició o finalizó. Deshabilitando campos...");
+    console.warn("[BBB DEBUG] La sesión ya inició o finalizó. Deshabilitando campos...");
 
     const camposDeshabilitar = form.querySelectorAll("input, select, textarea, button");
 
     camposDeshabilitar.forEach((campo) => {
       if (campo.name !== "cancel" && campo.type !== "hidden") {
         campo.setAttribute("disabled", "true");
+        console.log(`[BBB DEBUG] Campo deshabilitado: name=${campo.name}, type=${campo.type}`);
       }
     });
 
@@ -49,5 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
     mensaje.className = "alert alert-warning mt-3";
     mensaje.innerHTML = "⚠️ Esta videoconferencia ya ha iniciado o finalizado y no se puede editar.";
     form.prepend(mensaje);
+    console.log("[BBB DEBUG] Mensaje de advertencia insertado.");
+  } else {
+    console.log("[BBB DEBUG] La sesión aún no ha iniciado. Edición permitida.");
   }
 });
