@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(function(){console.log("pruebaaa 3"),console.log("Script iniciado");const e=document.querySelector(".notification-area").querySelector(".content-area").querySelector(".content").querySelector("pre");console.log("Elementos encontrados:",e)}));
