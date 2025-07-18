@@ -1,1 +1,0 @@
-document.addEventListener("DOMContentLoaded",(function(){console.log("pruebaaa 2"),console.log("Script iniciado");const o=document.getElementsByClassName("notification-area");console.log("Elementos <pre> encontrados:",o.length),console.log("Elementos encontrados:",o)}));
